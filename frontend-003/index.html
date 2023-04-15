@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Allen Shih">
+    
+    <title>
+        
+            實作一個可視區域導讀提醒 |
+        
+        Allen Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo/favicon.png">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"eepson123tw.github.io","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#9999CC","avatar":"/images/avatar.svg","favicon":"/images/logo/favicon.png","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"圍繞核心，漸進增強!"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":true},"comment":{"enable":true,"use":"gitalk","gitalk":{"github_id":"eepson123tw","repository":"eepson123tw.gitalk","client_id":"b57e764afef07bde3085","client_secret":"7b8d5b15886c8be0aaaac7fe3945bd94a6aff797","owner":"eepson123tw","admin":["eepson123tw"]}},"post":{"word_count":{"enable":true,"wordcount":true,"min2read":true},"author_label":{"enable":true,"auto":false,"custom_label_list":["轉職打工仔","前端工程師","愛發文的前端工程師"]}},"version":"3.5.2"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Allen" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo/logo_transparent.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Allen Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">實作一個可視區域導讀提醒</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Allen Shih</span>
+                            
+                                <span class="author-label">前端工程師</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2022-11-05 00:08:25</span>
+        <span class="mobile">2022-11-05 00:08</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-04-15 06:40:07</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Intersection-Observer-API/">Intersection Observer API</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>18 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                <p>在前端的開發過程中，常需要在某個視覺區塊進入頁面的可視範圍時，讓頁面進行某些變化，我們會使用一些第三方的套件庫，但第三方的套件庫可能相當龐大，或是使用上來說並沒有那麼直覺，那有沒有其他更便利方法呢？</p>
+<h1 id="Intersection-Observer"><a href="#Intersection-Observer" class="headerlink" title="Intersection Observer"></a>Intersection Observer</h1><p>原生的 Api，可以用來觀測頁面元素與可見區域相交部分的比例，然後可以在達到比例時觸發 callback。<br>常被用來在圖片的 lazyLoading，內容的無限滾動，及自動播放影片或音檔等功能。</p>
+<h2 id="參數"><a href="#參數" class="headerlink" title="參數"></a>參數</h2><p><code>IntersectionObserver(callback， options)</code>  接受兩個參數：</p>
+<ul>
+<li><code>callback</code>： 當指定重疊條件發生時要執行的 callback 函式。</li>
+<li><code>options</code>：<ul>
+<li><code>root</code>：欲觀察的 root 元素，不特別指定或是  <code>null</code>  時等於瀏覽器的可視範圍 (browser viewport)。</li>
+<li><code>rootMargin</code>：用來改變 root 元素觀察的範圍。</li>
+<li><code>threshold</code>：Target(目標元素) 的可見程度。可帶入浮點數或浮點數的 array，ex <code>[0， 0.25， 0.5， 0.75， 1]</code>，每當 target 的可見程度高於 threshold 時，<code>callback</code>  就會被頻繁地觸發， 也就是每 25% 或者减少 25% 的时候都通知一次。可看需求變動。</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  <span class="attr">root</span>: <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#scrollArea&#x27;</span>),</span><br><span class="line">  <span class="attr">rootMargin</span>: <span class="string">&#x27;0px&#x27;</span>,</span><br><span class="line">  <span class="attr">threshold</span>: <span class="number">0.5</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(callback, options);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> target = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#listItem&#x27;</span>);</span><br><span class="line">observer.<span class="title function_">observe</span>(target);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="實際使用案例"><a href="#實際使用案例" class="headerlink" title="實際使用案例:"></a>實際使用案例:</h1><p>筆者希望能夠模擬出閱讀網站的功能，即在當前閱讀區域時，可以在 menu list 標記閱讀區塊及變動 URL。</p>
+<blockquote>
+<p><code>實現程式碼使用 vue3，可貼上下方程式碼，觀看變化 </code></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line">&lt;!<span class="variable constant_">DOCTYPE</span> html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">  &lt;style &gt;</span><br><span class="line">    *&#123;</span><br><span class="line">      margin: 0;</span><br><span class="line">      padding: 0;</span><br><span class="line">      list-style: none;</span><br><span class="line">      box-sizing: border-box</span><br><span class="line">    &#125;</span><br><span class="line">    body&#123;</span><br><span class="line">      display: flex;</span><br><span class="line">      justify-content: center;</span><br><span class="line">      align-items: center;</span><br><span class="line">      background: #aaa;</span><br><span class="line">    &#125;</span><br><span class="line">    .container&#123;</span><br><span class="line">      height: 2500px;</span><br><span class="line">    &#125;</span><br><span class="line">    h1&#123;</span><br><span class="line">      font-size: 5rem;</span><br><span class="line">    &#125;</span><br><span class="line">    p&#123;</span><br><span class="line">      font-size: 1rem;</span><br><span class="line">      line-height: 2;</span><br><span class="line">    &#125;</span><br><span class="line">    .menu&#123;</span><br><span class="line">      position: fixed;</span><br><span class="line">      top: 0;</span><br><span class="line">      right:0;</span><br><span class="line">      width: 200px;</span><br><span class="line">      height: 200px;</span><br><span class="line">      background: #fff;</span><br><span class="line">    &#125;</span><br><span class="line">    .menu ul&#123;</span><br><span class="line">      display: flex;</span><br><span class="line">      flex-direction: column;</span><br><span class="line">      background: #aaa;</span><br><span class="line">      height: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .menu ul li&#123;</span><br><span class="line">      flex-grow: 1;</span><br><span class="line">      text-align: center;</span><br><span class="line">      display: flex;</span><br><span class="line">      align-items: center;</span><br><span class="line">      justify-content: center;</span><br><span class="line">      background:#ccc;</span><br><span class="line">      color: #fff;</span><br><span class="line">    &#125;</span><br><span class="line">    a&#123;</span><br><span class="line">      text-decoration: none;</span><br><span class="line">      color: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">    .menu ul li.active a&#123;</span><br><span class="line">      color: red;</span><br><span class="line">      font-weight: 900;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot; id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;menu&quot;&gt;</span><br><span class="line">      &lt;ul v-if=&quot;ary.length&quot;&gt;</span><br><span class="line">        &lt;li v-for=&quot;(item,idx) of ary&quot; :class=&quot;`$&#123;item&#125;`&quot;&gt;</span><br><span class="line">          &lt;a :href=&quot;`#$&#123;item&#125;`&quot;&gt; &#123;&#123;item&#125;&#125;&lt;/a&gt;</span><br><span class="line">        &lt;/li&gt;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;div title1&quot; id=&quot;title1&quot; &gt;</span><br><span class="line">      &lt;h1&gt;title1&lt;/h1&gt;</span><br><span class="line">      &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio aspernatur iure esse vero eveniet quam, laudantium optio facere voluptate, autem ratione nihil dolorem veritatis non unde repellendus in maiores explicabo suscipit. Omnis quisquam tempora eum doloribus repellendus deserunt architecto, corrupti est, odit accusamus repellat ipsa voluptas quis nesciunt. Quos nostrum dolor, ratione, facere quis quibusdam nemo, vitae temporibus delectus voluptate odit eius debitis earum atque minus suscipit reiciendis. Perspiciatis cupiditate corporis nam dolore tempore molestias exercitationem nesciunt optio provident fugiat suscipit libero earum ea, modi nulla, quas delectus veniam, doloremque necessitatibus inventore. Ratione mollitia sequi architecto labore dolores magni omnis tenetur provident. Debitis praesentium tempora sit rerum! Eaque eum, sunt nesciunt voluptatem magni, nihil impedit dolorum nostrum assumenda eos at corrupti velit nam omnis quaerat esse iste dolorem? Exercitationem accusantium sint harum, ab nesciunt alias velit eveniet soluta sequi, nulla, facilis aliquid expedita modi possimus sit. Explicabo eveniet voluptates quis amet voluptas deleniti dolor, nostrum fugit error labore omnis exercitationem iste impedit saepe tempore nulla earum sequi aspernatur ratione harum! Magni autem quam magnam alias fuga nemo, quibusdam aliquid? Maxime adipisci eligendi eius ab repellat, iste aliquid illo provident similique obcaecati fuga animi quibusdam, quidem in numquam molestiae minus mollitia sequi veniam placeat molestias voluptates ex totam! Maiores veritatis cumque doloribus quas dolores illo facere deleniti in, perferendis, ea, facilis porro. Dignissimos vitae, nesciunt velit nostrum iste iure labore tempore consectetur ducimus exercitationem recusandae voluptas blanditiis ut aut, accusamus pariatur voluptates rerum consequatur qui assumenda vel provident neque? Delectus reiciendis incidunt molestiae iusto ea officia itaque ipsum at doloremque hic dolorem eius atque sunt, corporis, magni deleniti sint odit optio fuga. Ratione expedita eligendi magni voluptate alias delectus totam tempora veritatis, qui itaque? Tenetur ea quam quisquam deleniti itaque asperiores nesciunt, culpa nam dolorum voluptate amet ducimus exercitationem laborum, temporibus optio! Minima reprehenderit ipsum sit quisquam, ipsam est voluptates recusandae adipisci, a voluptas perspiciatis officiis, quibusdam eos? Dicta facere modi voluptatem inventore? Odit a repellendus corrupti atque porro nostrum perferendis possimus, repudiandae quas incidunt enim maiores ea distinctio ad est quaerat. Explicabo suscipit laborum, ea amet in id quis consequatur odio quo perferendis nihil quia necessitatibus nostrum quam vero laudantium iusto tempora voluptate nulla. Corrupti perferendis culpa, similique praesentium saepe sint porro! Vero unde illum tempore dolore, eaque saepe voluptate repellat similique commodi eos doloremque nulla quos itaque tenetur enim, error culpa fuga quisquam laborum? Earum, corporis, libero quo voluptatibus voluptatem odio dignissimos aliquid nam ea esse vel eveniet, similique recusandae. Nesciunt quasi tenetur aperiam laboriosam consectetur aut quae soluta reprehenderit deserunt, dolore ratione ipsum fugiat! Accusamus a vel delectus repellat laudantium dignissimos reprehenderit eveniet, ipsum dolorem placeat labore tenetur accusantium tempora beatae aperiam commodi eligendi inventore velit. Esse repellendus deleniti rerum praesentium! Soluta ipsam dolore quod suscipit corrupti cum doloribus iure voluptatem alias accusamus molestias maiores sint excepturi magni magnam labore, accusantium adipisci aspernatur, quidem dolores perspiciatis saepe repellendus rem? Repudiandae, maiores culpa sequi voluptates distinctio quae explicabo mollitia ea repellat, cum ipsam adipisci aliquam accusantium perferendis nobis beatae.&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem eveniet architecto rerum amet corrupti velit tempore odit placeat, impedit, nisi eligendi? At excepturi reiciendis ab tempore voluptas voluptatum aperiam nisi.&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;div title2&quot; id=&quot;title2&quot;&gt;</span><br><span class="line">      &lt;h1&gt;title2&lt;/h1&gt;</span><br><span class="line">      &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio aspernatur iure esse vero eveniet quam, laudantium optio facere voluptate, autem ratione nihil dolorem veritatis non unde repellendus in maiores explicabo suscipit. Omnis quisquam tempora eum doloribus repellendus deserunt architecto, corrupti est, odit accusamus repellat ipsa voluptas quis nesciunt. Quos nostrum dolor, ratione, facere quis quibusdam nemo, vitae temporibus delectus voluptate odit eius debitis earum atque minus suscipit reiciendis. Perspiciatis cupiditate corporis nam dolore tempore molestias exercitationem nesciunt optio provident fugiat suscipit libero earum ea, modi nulla, quas delectus veniam, doloremque necessitatibus inventore. Ratione mollitia sequi architecto labore dolores magni omnis tenetur provident. Debitis praesentium tempora sit rerum! Eaque eum, sunt nesciunt voluptatem magni, nihil impedit dolorum nostrum assumenda eos at corrupti velit nam omnis quaerat esse iste dolorem? Exercitationem accusantium sint harum, ab nesciunt alias velit eveniet soluta sequi, nulla, facilis aliquid expedita modi possimus sit. Explicabo eveniet voluptates quis amet voluptas deleniti dolor, nostrum fugit error labore omnis exercitationem iste impedit saepe tempore nulla earum sequi aspernatur ratione harum! Magni autem quam magnam alias fuga nemo, quibusdam aliquid? Maxime adipisci eligendi eius ab repellat, iste aliquid illo provident similique obcaecati fuga animi quibusdam, quidem in numquam molestiae minus mollitia sequi veniam placeat molestias voluptates ex totam! Maiores veritatis cumque doloribus quas dolores illo facere deleniti in, perferendis, ea, facilis porro. Dignissimos vitae, nesciunt velit nostrum iste iure labore tempore consectetur ducimus exercitationem recusandae voluptas blanditiis ut aut, accusamus pariatur voluptates rerum consequatur qui assumenda vel provident neque? Delectus reiciendis incidunt molestiae iusto ea officia itaque ipsum at doloremque hic dolorem eius atque sunt, corporis, magni deleniti sint odit optio fuga. Ratione expedita eligendi magni voluptate alias delectus totam tempora veritatis, qui itaque? Tenetur ea quam quisquam deleniti itaque asperiores nesciunt, culpa nam dolorum voluptate amet ducimus exercitationem laborum, temporibus optio! Minima reprehenderit ipsum sit quisquam, ipsam est voluptates recusandae adipisci, a voluptas perspiciatis officiis, quibusdam eos? Dicta facere modi voluptatem inventore? Odit a repellendus corrupti atque porro nostrum perferendis possimus, repudiandae quas incidunt enim maiores ea distinctio ad est quaerat. Explicabo suscipit laborum, ea amet in id quis consequatur odio quo perferendis nihil quia necessitatibus nostrum quam vero laudantium iusto tempora voluptate nulla. Corrupti perferendis culpa, similique praesentium saepe sint porro! Vero unde illum tempore dolore, eaque saepe voluptate repellat similique commodi eos doloremque nulla quos itaque tenetur enim, error culpa fuga quisquam laborum? Earum, corporis, libero quo voluptatibus voluptatem odio dignissimos aliquid nam ea esse vel eveniet, similique recusandae. Nesciunt quasi tenetur aperiam laboriosam consectetur aut quae soluta reprehenderit deserunt, dolore ratione ipsum fugiat! Accusamus a vel delectus repellat laudantium dignissimos reprehenderit eveniet, ipsum dolorem placeat labore tenetur accusantium tempora beatae aperiam commodi eligendi inventore velit. Esse repellendus deleniti rerum praesentium! Soluta ipsam dolore quod suscipit corrupti cum doloribus iure voluptatem alias accusamus molestias maiores sint excepturi magni magnam labore, accusantium adipisci aspernatur, quidem dolores perspiciatis saepe repellendus rem? Repudiandae, maiores culpa sequi voluptates distinctio quae explicabo mollitia ea repellat, cum ipsam adipisci aliquam accusantium perferendis nobis beatae.&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem eveniet architecto rerum amet corrupti velit tempore odit placeat, impedit, nisi eligendi? At excepturi reiciendis ab tempore voluptas voluptatum aperiam nisi.&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;div title3&quot; id=&quot;title3&quot; &gt;</span><br><span class="line">      &lt;h1&gt;title3&lt;/h1&gt;</span><br><span class="line">      &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nemo inventore quaerat consequuntur culpa qui accusantium explicabo quod voluptatum ab, quidem rem ipsa? Tempora, pariatur vitae neque voluptatum eum sed iusto maiores fugiat repellendus incidunt iste explicabo obcaecati eveniet quibusdam non a sint voluptas, illum vero exercitationem sunt nihil voluptate? Hic, quo nesciunt. Vel exercitationem ipsam error eligendi nisi voluptate earum nesciunt ullam fuga. Ipsum exercitationem culpa, laborum repellat nulla iusto vitae rerum eligendi. Fugit sunt, tenetur itaque reiciendis non magnam officiis odit voluptatum culpa fuga, velit ab! Quaerat totam sapiente laborum quae eius tempora obcaecati qui aliquid animi. Expedita adipisci aperiam deleniti deserunt repudiandae velit ipsa temporibus dolorum minus? Inventore, quo dolorem possimus reiciendis repellendus veniam praesentium provident ratione eos officia corrupti architecto, sequi cum at obcaecati fuga repudiandae? Necessitatibus, veritatis recusandae hic eos ducimus cumque tenetur odio, doloribus sapiente quam similique tempora at voluptate nesciunt quisquam dolore sit saepe molestias dolores illum placeat sunt. Eos, doloribus? Soluta explicabo similique vitae tempore blanditiis voluptatem dicta? Eius repellendus id sit accusamus saepe rem debitis modi vel dolores autem ut voluptatum a sequi aliquam, ad eos eum libero iure minus quam sint. Necessitatibus eum id commodi quae? Incidunt rem atque dolores eligendi voluptatibus aliquam aspernatur numquam. Nobis, iusto illo! Repellendus, a sapiente vitae voluptatum iusto corporis perspiciatis earum cupiditate optio, blanditiis est voluptates ducimus inventore ullam amet id minus neque sit harum corrupti aspernatur. Commodi mollitia aperiam aspernatur magni, aliquam quas quia voluptas accusantium repellendus obcaecati cumque quibusdam voluptatem labore ab non eum rem! Nostrum, accusantium delectus rerum explicabo ipsa obcaecati nobis commodi animi est repellendus culpa eos eum aliquam sit quod nesciunt maxime excepturi ducimus deserunt! Eligendi, nostrum. Iste repudiandae incidunt corrupti atque. Nemo impedit porro mollitia corrupti aut nihil repellendus quibusdam libero. Numquam explicabo veritatis libero aut ex aliquam consequatur adipisci sint vitae architecto velit quidem iste saepe consequuntur quisquam cum, magnam deleniti amet sed error facilis vero magni alias. Sit, minus provident quia harum iure officia porro nemo doloremque voluptatum. Culpa laudantium consectetur fuga, temporibus iste ipsa accusantium pariatur molestias harum! Ullam dignissimos corrupti ipsam vero reiciendis iure dicta sed aliquid officia eos adipisci soluta quibusdam in deleniti similique aperiam deserunt, quis provident itaque quia sint? Vel odit sit, quasi molestiae quaerat unde nihil maxime harum, doloribus libero assumenda, facere illo corrupti. Error dicta repellat, rerum ratione atque, impedit quia nobis nisi ipsa veniam dolore minus porro libero eos fugiat laudantium at perspiciatis architecto! Sunt modi, optio nulla dignissimos in provident repudiandae libero. Voluptatibus tempora consequuntur alias necessitatibus quisquam culpa porro sequi, odio quam voluptates commodi deleniti impedit fuga, corporis explicabo totam minima ad eligendi ipsa laborum exercitationem dolorem libero aliquam. Quibusdam natus nulla facere saepe! Sunt, eius voluptatum. Placeat, neque exercitationem commodi nulla quis cum facere recusandae ipsa esse ad accusamus distinctio, officia, odio aperiam. Suscipit velit aliquam officia iure, non rerum numquam laborum error quas neque enim cum illum accusantium facilis tempora, eum ipsam porro quidem similique, recusandae unde illo culpa nisi. Pariatur, voluptates? Sapiente, nam?&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio aspernatur iure esse vero eveniet quam, laudantium optio facere voluptate, autem ratione nihil dolorem veritatis non unde repellendus in maiores explicabo suscipit. Omnis quisquam tempora eum doloribus repellendus deserunt architecto, corrupti est, odit accusamus repellat ipsa voluptas quis nesciunt. Quos nostrum dolor, ratione, facere quis quibusdam nemo, vitae temporibus delectus voluptate odit eius debitis earum atque minus suscipit reiciendis. Perspiciatis cupiditate corporis nam dolore tempore molestias exercitationem nesciunt optio provident fugiat suscipit libero earum ea, modi nulla, quas delectus veniam, doloremque necessitatibus inventore. Ratione mollitia sequi architecto labore dolores magni omnis tenetur provident. Debitis praesentium tempora sit rerum! Eaque eum, sunt nesciunt voluptatem magni, nihil impedit dolorum nostrum assumenda eos at corrupti velit nam omnis quaerat esse iste dolorem? Exercitationem accusantium sint harum, ab nesciunt alias velit eveniet soluta sequi, nulla, facilis aliquid expedita modi possimus sit. Explicabo eveniet voluptates quis amet voluptas deleniti dolor, nostrum fugit error labore omnis exercitationem iste impedit saepe tempore nulla earum sequi aspernatur ratione harum! Magni autem quam magnam alias fuga nemo, quibusdam aliquid? Maxime adipisci eligendi eius ab repellat, iste aliquid illo provident similique obcaecati fuga animi quibusdam, quidem in numquam molestiae minus mollitia sequi veniam placeat molestias voluptates ex totam! Maiores veritatis cumque doloribus quas dolores illo facere deleniti in, perferendis, ea, facilis porro. Dignissimos vitae, nesciunt velit nostrum iste iure labore tempore consectetur ducimus exercitationem recusandae voluptas blanditiis ut aut, accusamus pariatur voluptates rerum consequatur qui assumenda vel provident neque? Delectus reiciendis incidunt molestiae iusto ea officia itaque ipsum at doloremque hic dolorem eius atque sunt, corporis, magni deleniti sint odit optio fuga. Ratione expedita eligendi magni voluptate alias delectus totam tempora veritatis, qui itaque? Tenetur ea quam quisquam deleniti itaque asperiores nesciunt, culpa nam dolorum voluptate amet ducimus exercitationem laborum, temporibus optio! Minima reprehenderit ipsum sit quisquam, ipsam est voluptates recusandae adipisci, a voluptas perspiciatis officiis, quibusdam eos? Dicta facere modi voluptatem inventore? Odit a repellendus corrupti atque porro nostrum perferendis possimus, repudiandae quas incidunt enim maiores ea distinctio ad est quaerat. Explicabo suscipit laborum, ea amet in id quis consequatur odio quo perferendis nihil quia necessitatibus nostrum quam vero laudantium iusto tempora voluptate nulla. Corrupti perferendis culpa, similique praesentium saepe sint porro! Vero unde illum tempore dolore, eaque saepe voluptate repellat similique commodi eos doloremque nulla quos itaque tenetur enim, error culpa fuga quisquam laborum? Earum, corporis, libero quo voluptatibus voluptatem odio dignissimos aliquid nam ea esse vel eveniet, similique recusandae. Nesciunt quasi tenetur aperiam laboriosam consectetur aut quae soluta reprehenderit deserunt, dolore ratione ipsum fugiat! Accusamus a vel delectus repellat laudantium dignissimos reprehenderit eveniet, ipsum dolorem placeat labore tenetur accusantium tempora beatae aperiam commodi eligendi inventore velit. Esse repellendus deleniti rerum praesentium! Soluta ipsam dolore quod suscipit corrupti cum doloribus iure voluptatem alias accusamus molestias maiores sint excepturi magni magnam labore, accusantium adipisci aspernatur, quidem dolores perspiciatis saepe repellendus rem? Repudiandae, maiores culpa sequi voluptates distinctio quae explicabo mollitia ea repellat, cum ipsam adipisci aliquam accusantium perferendis nobis beatae.&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem eveniet architecto rerum amet corrupti velit tempore odit placeat, impedit, nisi eligendi? At excepturi reiciendis ab tempore voluptas voluptatum aperiam nisi.&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    const &#123; createApp &#125; = Vue</span><br><span class="line"></span><br><span class="line">    createApp(&#123;</span><br><span class="line">      data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">          ary:[]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      mounted() &#123;</span><br><span class="line">        let h1Ary = [...document.querySelectorAll(&#x27;h1&#x27;)].map((d)=&gt;d.innerText)</span><br><span class="line">        this.ary = h1Ary;</span><br><span class="line"></span><br><span class="line">        const observerOptions = &#123;</span><br><span class="line">          root: null,</span><br><span class="line">          rootMargin: &quot;0px&quot;,</span><br><span class="line">          threshold: [0.0, 0.75]</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        adObserver = new IntersectionObserver(intersectionCallback,</span><br><span class="line">                          observerOptions);</span><br><span class="line"></span><br><span class="line">        function intersectionCallback(entries) &#123;</span><br><span class="line">          entries.forEach((entry) =&gt; &#123;</span><br><span class="line">            let e = entry.target.classList[1]</span><br><span class="line">            let li = document.querySelector(`li.$&#123;e&#125;`)</span><br><span class="line">            if (entry.isIntersecting) &#123;</span><br><span class="line">              if (entry.intersectionRatio &gt;=0.75) &#123;</span><br><span class="line">                li.classList.add(&#x27;active&#x27;)</span><br><span class="line">                li.querySelector(&#x27;a&#x27;).click()</span><br><span class="line">              &#125;else&#123;</span><br><span class="line">                li.classList.remove(&#x27;active&#x27;)</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setTimeout(()=&gt;&#123;</span><br><span class="line">        h1Ary.forEach((d)=&gt;&#123;</span><br><span class="line">          let x= document.querySelector(`div.$&#123;d&#125;`)</span><br><span class="line">          adObserver.observe(x)</span><br><span class="line">        &#125;)</span><br><span class="line">        &#125;,500)</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">    &#125;).mount(&#x27;#app&#x27;)</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>參考資料<br><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API" >MDN Intersection Observer<i class="fas fa-external-link-alt"></i></a></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Intersection-Observer-API/">#Intersection Observer API</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/frontend-004/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">如何操作複雜的物件結構</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/frameWork/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">前端與框架的關係</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    
+<div class="comments-container">
+    <div id="comments-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;Comments
+    </div>
+    
+        
+            
+
+    <div class="gitalk-comment-container">
+        <div id="gitalk-container"></div>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+        <script  src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+        <script >
+          function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+              __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+              Gitalk && new Gitalk({
+                clientID: 'b57e764afef07bde3085',
+                clientSecret: '7b8d5b15886c8be0aaaac7fe3945bd94a6aff797',
+                repo: 'eepson123tw.gitalk',
+                owner: 'eepson123tw',
+                admin: 'eepson123tw',
+                id: __gitalk__pathname,
+                language: 'en'
+              }).render('gitalk-container');
+            } catch (e) {
+              window.Gitalk = null;
+            }
+          }
+
+          if ('false' === 'true') {
+            const loadGitalkTimeout = setTimeout(() => {
+              loadGitalk();
+              clearTimeout(loadGitalkTimeout);
+            }, 1000);
+          } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+          }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intersection-Observer"><span class="nav-number">1.</span> <span class="nav-text">Intersection Observer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E6%95%B8"><span class="nav-number">1.1.</span> <span class="nav-text">參數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">使用方法：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%A6%E9%9A%9B%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">實際使用案例:</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2021</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Allen Shih</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>

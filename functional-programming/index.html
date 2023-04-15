@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Allen Shih">
+    
+    <title>
+        
+            簡易函式封裝 |
+        
+        Allen Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo/favicon.png">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"eepson123tw.github.io","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#9999CC","avatar":"/images/avatar.svg","favicon":"/images/logo/favicon.png","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"圍繞核心，漸進增強!"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":true},"comment":{"enable":true,"use":"gitalk","gitalk":{"github_id":"eepson123tw","repository":"eepson123tw.gitalk","client_id":"b57e764afef07bde3085","client_secret":"7b8d5b15886c8be0aaaac7fe3945bd94a6aff797","owner":"eepson123tw","admin":["eepson123tw"]}},"post":{"word_count":{"enable":true,"wordcount":true,"min2read":true},"author_label":{"enable":true,"auto":false,"custom_label_list":["轉職打工仔","前端工程師","愛發文的前端工程師"]}},"version":"3.5.2"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Allen" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo/logo_transparent.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Allen Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">簡易函式封裝</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Allen Shih</span>
+                            
+                                <span class="author-label">前端工程師</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2022-05-07 13:15:06</span>
+        <span class="mobile">2022-05-07 13:15</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-04-15 06:40:07</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/function/">function</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/program/">program</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Encapsulation/">Encapsulation</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                <p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/fn/fn1.png"
+                      alt="編成範式圖"
+                ></p>
+<ul>
+<li>面向過程 關心執行流程與控制，通過順序執行一組語句來實現一個功能，這些語句的執行過程就是整個程式</li>
+<li>物件導向 將數據與指令組織成模塊，模塊間通過繼承、多態、委託等方式實現複用</li>
+<li>函數式 核心思想是將運算過程儘量寫成一系列嵌套的函數調用，關注的是做什麼而不是怎麼做</li>
+<li>邏輯式 只關心規則、事實和問題的推導這樣的標準方式，不需要關心程序控制，也不需要關心具體的實現算法</li>
+</ul>
+<hr>
+<p>若在網路上搜尋 javascript 的封裝常常會看到物件導向、函數式編成等關鍵字，其核心都是將抽象的細節邏輯去做包裝，優化、細節處理，降低開發複雜度後提供給使用者，我們並不需要了解深度的封裝細節，就能快速地使用這些邏輯，達到我們要的應用。<br>例如現代 js 的三大框架，也是經過許多深度的封裝後，提供開發者便利的 api 及框架環境~</p>
+<p>例如:</p>
+<ul>
+<li>vue2、vue3 -&gt;響應式物件代理(proxy,object.defineproperty)、觀察者、訂閱者、渲染器 。</li>
+<li>react 的 render、redux、hook 函式</li>
+</ul>
+<hr>
+<p>今天想介紹最簡單的幾種函數封裝的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">基礎封裝的幾種返回模式</span><br><span class="line">   ()=&gt;() <span class="comment">//返回 function</span></span><br><span class="line">   ()=&gt;&#123;&#125; <span class="comment">//返回帶有方法的 &#123;&#125;</span></span><br><span class="line">   ()=&gt;[] <span class="comment">//返回 陣列</span></span><br><span class="line">   ()=&gt;x?<span class="attr">x</span>:y <span class="comment">//返回 condition</span></span><br><span class="line">   (<span class="keyword">function</span>(<span class="params">root</span>)&#123;&#125;)(<span class="variable language_">window</span>)<span class="comment">//基礎封裝  匿名函數</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="返回-function"><a href="#返回-function" class="headerlink" title="返回 function"></a>返回 function</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">賦值表達式;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">m</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">n</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> m + n;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">add</span>(<span class="number">10</span>)(<span class="number">20</span>) &gt;&gt; <span class="number">30</span>;</span><br><span class="line">複雜表達式(<span class="function">(<span class="params">x</span>) =&gt;</span> <span class="function">(<span class="params">y</span>) =&gt;</span> x + y)(<span class="number">10</span>)(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我們利用閉包的特性將 m 及 n 分別暫存住各自的值，等到 return 後記憶體便會釋放，我們也能得到 30 最為回傳值。<br>我們也可以利用複雜表達式的寫法去重寫上面的程式碼，兩種寫法是等價的。</p>
+<p>有很多應用的情況，例如針對使用者 input 的值，我們需要使用正則的判斷，去檢測有無非預期的輸入，此時就可以使用這種封裝方式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">vaild</span> = (<span class="params">rex</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> rex.<span class="title function_">test</span>(val);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> emailVaild = <span class="title function_">vaild</span>(</span><br><span class="line">  <span class="regexp">/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]&#123;2,4&#125;)$/</span></span><br><span class="line">);</span><br><span class="line"><span class="title function_">emailVaild</span>(<span class="string">&quot;aaa@.asdasd&quot;</span>);</span><br><span class="line"><span class="literal">false</span>;</span><br><span class="line"><span class="title function_">emailVaild</span>(<span class="string">&quot;aaa@gmail.com&quot;</span>);</span><br><span class="line"><span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>經過了這一層的封裝，我們就能依照不同的正則規則，去檢驗不同的輸入，非常的方便且複用性相當高。</p>
+<h2 id="返回帶有方法的"><a href="#返回帶有方法的" class="headerlink" title="返回帶有方法的{}"></a>返回帶有方法的{}</h2><p>我們封裝一個會回傳物件的函式，讓他再回傳封裝在其中的邏輯，做出一個可以與之互動的錢包。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">newWaller</span>(<span class="params">x</span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> money = x</span><br><span class="line">  <span class="keyword">let</span> <span class="title function_">log</span> = (<span class="params">key</span>)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(!log[name]) log[name]=&#123;&#125;</span><br><span class="line">    <span class="keyword">if</span>(log[name][key]!==<span class="literal">undefined</span>) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    log[name][key] = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toLocaleString</span>()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    <span class="attr">checkMoney</span>:<span class="function">()=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(money)&#125;,</span><br><span class="line">    <span class="attr">use</span>:<span class="function">(<span class="params">x</span>)=&gt;</span>&#123;</span><br><span class="line">      money= <span class="title function_">x</span>(money)</span><br><span class="line">      <span class="title function_">log</span>(x.<span class="property">name</span>)  <span class="comment">//傳入fn名稱當作key</span></span><br><span class="line">      <span class="keyword">return</span> money</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">printLog</span>:<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(log[name])</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> <span class="keyword">const</span> allenMoney = <span class="title function_">newWaller</span>(<span class="number">100</span>);</span><br><span class="line"> <span class="keyword">const</span> <span class="title function_">buyDrink</span> = (<span class="params">x</span>) =&gt; x - <span class="number">10</span>;</span><br><span class="line"> <span class="keyword">const</span> <span class="title function_">buylunch</span> = (<span class="params">x</span>) =&gt; x - <span class="number">60</span>;</span><br><span class="line">allenMoney.<span class="title function_">use</span>(buyDrink);</span><br><span class="line">allenMoney.<span class="title function_">use</span>(buylunch);</span><br><span class="line">allenMoney.<span class="title function_">checkMoney</span>();</span><br><span class="line">&gt;<span class="number">30</span></span><br><span class="line">allenMoney.<span class="title function_">printLog</span>();</span><br><span class="line">&gt;&#123;<span class="attr">buyDrink</span>: <span class="string">&#x27;2022/5/7 下午2:24:34&#x27;</span>, <span class="attr">buylunch</span>: <span class="string">&#x27;2022/5/7 下午2:24:34&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="返回-array"><a href="#返回-array" class="headerlink" title="返回 array"></a>返回 array</h2><p>我們可以透過一個封裝過的函式，return 出我們想要的值，更可以透過之前分享的嵌套模式，複合這些邏輯，相當地有趣。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;d&quot;</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="string">&quot;9&quot;</span>];</span><br><span class="line"><span class="comment">// 封裝 過濾出數字</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumbers</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> newArr = [];</span><br><span class="line">  arr.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">      newArr.<span class="title function_">push</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> newArr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumbers</span>(arr); <span class="comment">//取得數字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getEvenNumber</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> newArr = [];</span><br><span class="line">  arr.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (item % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">      newArr.<span class="title function_">push</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> newArr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getEvenNumber</span>(<span class="title function_">getNumbers</span>(arr)); <span class="comment">//取得偶數</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="返回-condition"><a href="#返回-condition" class="headerlink" title="返回 condition"></a>返回 condition</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">tellme</span>(<span class="params">b</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> b === <span class="literal">true</span> ? <span class="string">&quot;可&quot;</span> : <span class="string">&quot;不可&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">tellme</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isNumberEven</span>(<span class="params">number</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> number &gt; <span class="number">0</span> ? (number % <span class="number">2</span> === <span class="number">0</span> ? <span class="literal">true</span> : <span class="literal">false</span>) : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">isNumberEven</span>(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">也可以結合之前的應用;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">conditionOne</span> = (<span class="params">a, b</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">    <span class="string">`<span class="subst">$&#123;a.name&#125;</span> 比 <span class="subst">$&#123;b.name&#125;</span> 高<span class="subst">$&#123;a.height - b.height&#125;</span>公分，他當兵`</span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">conditionTwo</span> = (<span class="params">a, b</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">    <span class="string">`<span class="subst">$&#123;b.name&#125;</span> 比 <span class="subst">$&#123;a.name&#125;</span> 高 <span class="subst">$&#123;b.height - a.height&#125;</span>公分，他當兵`</span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">beSoldier</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a.<span class="property">height</span> &gt; b.<span class="property">height</span> ? <span class="title function_">conditionOne</span>(a, b) : <span class="title function_">conditionTwo</span>(a, b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">beSoldier</span>(&#123; <span class="attr">name</span>: <span class="string">&quot;Allen&quot;</span>, <span class="attr">height</span>: <span class="number">180</span> &#125;, &#123; <span class="attr">name</span>: <span class="string">&quot;Eric&quot;</span>, <span class="attr">height</span>: <span class="number">170</span> &#125;); <span class="comment">//allen 當兵去囉QQ</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="基礎封裝-匿名函數"><a href="#基礎封裝-匿名函數" class="headerlink" title="基礎封裝 匿名函數"></a>基礎封裝 匿名函數</h2><p>這邊就是框架們使用的方式，把一些東西掛載至 window，方便調用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">root, <span class="literal">undefined</span></span>) &#123;</span><br><span class="line">  <span class="comment">// 私有狀態</span></span><br><span class="line">  <span class="keyword">const</span> age = <span class="number">20</span>;</span><br><span class="line">  <span class="keyword">const</span> name = <span class="string">&quot;allen&quot;</span>;</span><br><span class="line">  <span class="keyword">let</span> money = <span class="number">87</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">show</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> x === <span class="string">&quot;you&quot;</span></span><br><span class="line">      ? <span class="string">`Your name is  <span class="subst">$&#123;name&#125;</span> and <span class="subst">$&#123;age&#125;</span> years old.`</span></span><br><span class="line">      : x === <span class="string">&quot;money&quot;</span></span><br><span class="line">      ? <span class="string">`your money is `</span> + money</span><br><span class="line">      : <span class="string">&quot;what?&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">getMoney</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`your money is `</span> + money;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">setMoney</span>(<span class="params">m</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (money += m);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">codingTime</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="title class_">Math</span>.<span class="title function_">abs</span>(<span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">2022</span>, <span class="number">05</span>) - <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">2020</span>, <span class="number">10</span>)) /</span><br><span class="line">        (<span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>) +</span><br><span class="line">      <span class="string">&quot;天&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 將引用保存在外部，一種簡單的對外開放方法的方式</span></span><br><span class="line">  root.<span class="property">Who</span> = &#123; show, getMoney, setMoney, codingTime &#125;;</span><br><span class="line">&#125;)(<span class="variable language_">window</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Who</span>.<span class="title function_">show</span>(<span class="string">&quot;you&quot;</span>);</span><br><span class="line"><span class="title class_">Who</span>.<span class="title function_">show</span>(<span class="string">&quot;age&quot;</span>);</span><br><span class="line"><span class="title class_">Who</span>.<span class="title function_">codingTime</span>();</span><br></pre></td></tr></table></figure>
+
+<p>以上介紹的這幾種方式，若經過良好的細節處理及互相應用，你也可以寫出有趣的 lib 供人們使用~</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/function/">#function</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/program/">#program</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Encapsulation/">#Encapsulation</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/dom/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">我們真的了解DOM嗎?</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/memory-layouts/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">記憶體布局</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    
+<div class="comments-container">
+    <div id="comments-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;Comments
+    </div>
+    
+        
+            
+
+    <div class="gitalk-comment-container">
+        <div id="gitalk-container"></div>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+        <script  src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+        <script >
+          function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+              __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+              Gitalk && new Gitalk({
+                clientID: 'b57e764afef07bde3085',
+                clientSecret: '7b8d5b15886c8be0aaaac7fe3945bd94a6aff797',
+                repo: 'eepson123tw.gitalk',
+                owner: 'eepson123tw',
+                admin: 'eepson123tw',
+                id: __gitalk__pathname,
+                language: 'en'
+              }).render('gitalk-container');
+            } catch (e) {
+              window.Gitalk = null;
+            }
+          }
+
+          if ('false' === 'true') {
+            const loadGitalkTimeout = setTimeout(() => {
+              loadGitalk();
+              clearTimeout(loadGitalkTimeout);
+            }, 1000);
+          } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+          }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E-function"><span class="nav-number">1.</span> <span class="nav-text">返回 function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%B8%B6%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84"><span class="nav-number">2.</span> <span class="nav-text">返回帶有方法的{}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E-array"><span class="nav-number">3.</span> <span class="nav-text">返回 array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E-condition"><span class="nav-number">4.</span> <span class="nav-text">返回 condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E5%B0%81%E8%A3%9D-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B8"><span class="nav-number">5.</span> <span class="nav-text">基礎封裝 匿名函數</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2021</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Allen Shih</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>

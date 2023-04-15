@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Allen Shih">
+    
+    <title>
+        
+            如何操作複雜的物件結構 |
+        
+        Allen Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo/favicon.png">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"eepson123tw.github.io","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#9999CC","avatar":"/images/avatar.svg","favicon":"/images/logo/favicon.png","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"圍繞核心，漸進增強!"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":true},"comment":{"enable":true,"use":"gitalk","gitalk":{"github_id":"eepson123tw","repository":"eepson123tw.gitalk","client_id":"b57e764afef07bde3085","client_secret":"7b8d5b15886c8be0aaaac7fe3945bd94a6aff797","owner":"eepson123tw","admin":["eepson123tw"]}},"post":{"word_count":{"enable":true,"wordcount":true,"min2read":true},"author_label":{"enable":true,"auto":false,"custom_label_list":["轉職打工仔","前端工程師","愛發文的前端工程師"]}},"version":"3.5.2"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Allen" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo/logo_transparent.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Allen Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">如何操作複雜的物件結構</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Allen Shih</span>
+                            
+                                <span class="author-label">前端工程師</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2022-11-26 00:45:20</span>
+        <span class="mobile">2022-11-26 00:45</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-04-15 06:40:07</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ArrayMethods/">ArrayMethods</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/iterable-Obj/">iterable Obj</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                <h1 id="如何操作複雜的物件結構"><a href="#如何操作複雜的物件結構" class="headerlink" title="如何操作複雜的物件結構"></a>如何操作複雜的物件結構</h1><p>在開發過程中，前端工程師們常常會遇到許多複雜的資料結構，結構與頁面的抽象及邏輯成正比，簡單來說，越複雜的結構就反應越複雜的頁面邏輯，當我們看到這些結構可以做哪些方法，去優化、簡化這些結構，來增加我們的開發效率並降低心智負擔呢?畢竟看到層層疊疊的物件及陣列，相信正常人的頭都會隱隱作痛XD<br>下面我們就來依序介紹:</p>
+<blockquote>
+<p>1.處理方法(Api工具)<br>2.邏輯拆解(思考資料結構拆分)<br>3.組合及優化(解題)</p>
+</blockquote>
+<h2 id="處理方法"><a href="#處理方法" class="headerlink" title="處理方法"></a>處理方法</h2><p>通常複雜的資料結構不免俗的就是物件及陣列的巢狀嵌套，要先來了解有哪些方法可以幫助我們處理，並用方法把目標解構出來吧!!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---條件篩選 </span><br><span class="line"><span class="keyword">const</span> ary = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>] ;</span><br><span class="line"><span class="keyword">const</span> aryMap=[&#123;<span class="attr">name</span>:<span class="string">&#x27;allen&#x27;</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">&#x27;joy&#x27;</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span>filter 遍歷目標陣列篩選出符合條件的物件，並回傳陣列。</span><br><span class="line"></span><br><span class="line">ary.<span class="title function_">filter</span>(<span class="function">(<span class="params">num</span>)=&gt;</span>num&gt;<span class="number">3</span>) =&gt; [<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>find  遍歷目標陣列篩選出符合條件的物件，並回傳物件。</span><br><span class="line"></span><br><span class="line">aryMap.<span class="title function_">find</span>(<span class="function">(<span class="params">d</span>)=&gt;</span>d.<span class="property">name</span>===<span class="string">&#x27;allen&#x27;</span>) =&gt; &#123;<span class="attr">name</span>: <span class="string">&#x27;allen&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>findIndex 遍歷目標陣列篩選出符合條件的物件，並回傳目標索引。</span><br><span class="line"></span><br><span class="line">ary.<span class="title function_">findIndex</span>(<span class="function">(<span class="params">num</span>)=&gt;</span>num&gt;<span class="number">3</span>) =&gt; <span class="number">3</span> (找到目標後,就停止遍歷。)</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span>includes 遍歷目標陣列篩選出符合條件的物件，並回傳布林值。</span><br><span class="line"></span><br><span class="line">aryMap.<span class="title function_">includes</span>(<span class="function">(<span class="params">d</span>)=&gt;</span> d.<span class="property">name</span> === <span class="string">&#x27;jack&#x27;</span>) =&gt; <span class="literal">false</span> </span><br><span class="line"></span><br><span class="line"><span class="number">5.</span>indexOf  回傳目標陣列中第一個被找到的索引值，若不存在則會回傳-<span class="number">1</span>。</span><br><span class="line"></span><br><span class="line">ary.<span class="title function_">indexOf</span>(<span class="number">3</span>)  =&gt; <span class="number">2</span></span><br><span class="line"></span><br><span class="line">---資料重組</span><br><span class="line"><span class="number">1.</span>map 遍歷陣列依照設定格式，回傳陣列。</span><br><span class="line"></span><br><span class="line">ary.<span class="title function_">map</span>(<span class="function">(<span class="params">x</span>)=&gt;</span>(&#123;<span class="attr">num</span>:x&#125;)) =&gt;[&#123;<span class="attr">num</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">num</span>:<span class="number">2</span>&#125;...]</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>reduce 遍歷陣列依照閉包設定格式，回傳陣列、或物件。(非常重要,可以組出任意元素)</span><br><span class="line">ary.<span class="title function_">reduce</span>(<span class="function">(<span class="params">acc,cur</span>)=&gt;</span>&#123;</span><br><span class="line">  acc[cur] = <span class="string">&#x27;id&#x27;</span>+cur+<span class="string">&#x27;!&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> acc</span><br><span class="line">&#125;,&#123;&#125;)</span><br><span class="line"></span><br><span class="line">=&gt;&#123;<span class="number">1</span>: <span class="string">&#x27;id1!&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;id2!&#x27;</span>, <span class="number">3</span>: <span class="string">&#x27;id3!&#x27;</span>, <span class="number">4</span>: <span class="string">&#x27;id4!&#x27;</span>, <span class="number">5</span>: <span class="string">&#x27;id5!&#x27;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以上的方法，有些是以閉包模式傳遞，並在內部遞迴後回傳出來，相當地有趣，筆者會在最後附上相關的實現內容，有興趣的話可以自己實做看看!會對這些方法的操作更加的熟悉!</p>
+<p>不知道有沒有一個疑問，那就是上方都是陣列的方法，那物件呢?陣列的原型方法沒法使用阿!?<br>物件原型方法上的篩選methods的確很少XD，但我們可以把物件轉成陣列模式操作啊!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;<span class="attr">a</span>:<span class="string">&#x27;123&#x27;</span>,<span class="attr">b</span>:<span class="string">&#x27;234&#x27;</span>,<span class="attr">c</span>:<span class="string">&#x27;345&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="property">keys</span> 回傳物件key值陣列</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(obj) =&gt;  [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="property">values</span> 回傳物件value值陣列</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">values</span>(obj) =&gt;[<span class="string">&#x27;123&#x27;</span>, <span class="string">&#x27;234&#x27;</span>, <span class="string">&#x27;345&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>看到這個模式是否燃燒起你的小宇宙了呢!!我們來合體操作看看吧!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;<span class="number">1</span>:&#123;<span class="attr">name</span>:<span class="string">&#x27;allen&#x27;</span>&#125;,<span class="number">2</span>:&#123;<span class="attr">name</span>:<span class="string">&#x27;joke&#x27;</span>&#125;,<span class="number">3</span>:&#123;<span class="attr">name</span>:<span class="string">&#x27;mindy&#x27;</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">values</span>(obj2).<span class="title function_">filter</span>(<span class="function">(<span class="params">d</span>)=&gt;</span>d.<span class="property">name</span>===<span class="string">&#x27;mindy&#x27;</span>) =&gt; &#123;<span class="attr">name</span>: <span class="string">&#x27;mindy&#x27;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="邏輯拆解"><a href="#邏輯拆解" class="headerlink" title="邏輯拆解"></a>邏輯拆解</h2><p>找出我們所需的關鍵資料的一個想法或概念,我們可以透過畫出flow，去嘗試構思哪些資料是我們所需的，且在解題時為必要，<br>透過這些拆分，我們可以把複雜的資料給拆解出細小原子，在不斷的組合起來。</p>
+<h2 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h2><p>在熟悉這些組合操作後，我們來挑戰一題較為困難的題目吧!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memberList = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">member</span>: <span class="string">&quot;Alex&quot;</span>,</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">score</span>: <span class="number">85</span>,</span><br><span class="line">    <span class="attr">order</span>: [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;E&quot;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">member</span>: <span class="string">&quot;jabo&quot;</span>,</span><br><span class="line">    <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">score</span>: <span class="number">83</span>,</span><br><span class="line">    <span class="attr">order</span>: [<span class="string">&quot;C&quot;</span>, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;E&quot;</span>, <span class="string">&quot;B&quot;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">member</span>: <span class="string">&quot;allen&quot;</span>,</span><br><span class="line">    <span class="attr">id</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="attr">score</span>: <span class="number">80</span>,</span><br><span class="line">    <span class="attr">order</span>: [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;E&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">member</span>: <span class="string">&quot;phobe&quot;</span>,</span><br><span class="line">    <span class="attr">id</span>: <span class="number">4</span>,</span><br><span class="line">    <span class="attr">score</span>: <span class="number">90</span>,</span><br><span class="line">    <span class="attr">order</span>: [<span class="string">&quot;D&quot;</span>, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;E&quot;</span>, <span class="string">&quot;B&quot;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">member</span>: <span class="string">&quot;celia&quot;</span>,</span><br><span class="line">    <span class="attr">id</span>: <span class="number">5</span>,</span><br><span class="line">    <span class="attr">score</span>: <span class="number">60</span>,</span><br><span class="line">    <span class="attr">order</span>: [<span class="string">&quot;C&quot;</span>, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;E&quot;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">Ｑ：按照分數高低，最後導出使用者的希望組別，組別不可以重複</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">memberList.<span class="title function_">sort</span>(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;a.<span class="property">score</span>-b.<span class="property">score</span>&#125;) <span class="comment">//先照高分順序排序</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//按照 組別分組</span></span><br><span class="line"><span class="keyword">let</span> groupBox = memberList.<span class="title function_">reduce</span>(<span class="function">(<span class="params">acc, cur, i</span>) =&gt;</span> &#123;</span><br><span class="line">  i === <span class="number">0</span> &amp;&amp; cur.<span class="property">order</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">d</span>) =&gt;</span> (acc[d] = [])); <span class="comment">//先將組別放入物件中，並將值設為陣列</span></span><br><span class="line">  cur.<span class="property">order</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">d, x</span>) =&gt;</span> &#123;</span><br><span class="line">    acc[d].<span class="title function_">push</span>(&#123; d, <span class="attr">n</span>: cur.<span class="property">member</span>, <span class="attr">s</span>: cur.<span class="property">score</span>, <span class="attr">hopeIndex</span>: x &#125;); <span class="comment">//依照順序送入陣列中</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> acc;</span><br><span class="line">&#125;, &#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> map = [];</span><br><span class="line"><span class="keyword">let</span> pointer = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//指針移動推入希望組別</span></span><br><span class="line"><span class="keyword">while</span> (pointer &lt; memberList.<span class="property">length</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (key <span class="keyword">in</span> groupBox) &#123;</span><br><span class="line">    map.<span class="title function_">push</span>(groupBox[key][pointer]); <span class="comment">//此時的map陣列中就是按照分數高低及使用者意願的順序</span></span><br><span class="line">    pointer++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">但這解法有一個問題，就是<span class="keyword">for</span> <span class="keyword">in</span> 並保證key順序，若為重要資料陣列，建議還是另外保存索引值，較為理想喔!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>若有更有趣的實現方式，歡迎在下方留言~</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/eepson123tw/DeepLearnJs/blob/master/10%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B%E6%93%8D%E4%BD%9C%E5%8F%8A%E5%AF%A6%E7%8F%BE/arrayApi.js" >陣列實現<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Statements/for...in" >for in<i class="fas fa-external-link-alt"></i></a></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/ArrayMethods/">#ArrayMethods</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/iterable-Obj/">#iterable Obj</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/frontend-005/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">網頁的效能指標及優化</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/frontend-003/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">實作一個可視區域導讀提醒</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    
+<div class="comments-container">
+    <div id="comments-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;Comments
+    </div>
+    
+        
+            
+
+    <div class="gitalk-comment-container">
+        <div id="gitalk-container"></div>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+        <script  src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+        <script >
+          function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+              __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+              Gitalk && new Gitalk({
+                clientID: 'b57e764afef07bde3085',
+                clientSecret: '7b8d5b15886c8be0aaaac7fe3945bd94a6aff797',
+                repo: 'eepson123tw.gitalk',
+                owner: 'eepson123tw',
+                admin: 'eepson123tw',
+                id: __gitalk__pathname,
+                language: 'en'
+              }).render('gitalk-container');
+            } catch (e) {
+              window.Gitalk = null;
+            }
+          }
+
+          if ('false' === 'true') {
+            const loadGitalkTimeout = setTimeout(() => {
+              loadGitalk();
+              clearTimeout(loadGitalkTimeout);
+            }, 1000);
+          } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+          }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E8%A4%87%E9%9B%9C%E7%9A%84%E7%89%A9%E4%BB%B6%E7%B5%90%E6%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">如何操作複雜的物件結構</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%95%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">處理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%8F%E8%BC%AF%E6%8B%86%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">邏輯拆解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A1%8C"><span class="nav-number">1.3.</span> <span class="nav-text">解題</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2021</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Allen Shih</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>

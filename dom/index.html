@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Allen Shih">
+    
+    <title>
+        
+            我們真的了解DOM嗎? |
+        
+        Allen Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo/favicon.png">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"eepson123tw.github.io","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#9999CC","avatar":"/images/avatar.svg","favicon":"/images/logo/favicon.png","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"圍繞核心，漸進增強!"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":true},"comment":{"enable":true,"use":"gitalk","gitalk":{"github_id":"eepson123tw","repository":"eepson123tw.gitalk","client_id":"b57e764afef07bde3085","client_secret":"7b8d5b15886c8be0aaaac7fe3945bd94a6aff797","owner":"eepson123tw","admin":["eepson123tw"]}},"post":{"word_count":{"enable":true,"wordcount":true,"min2read":true},"author_label":{"enable":true,"auto":false,"custom_label_list":["轉職打工仔","前端工程師","愛發文的前端工程師"]}},"version":"3.5.2"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Allen" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo/logo_transparent.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Allen Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">我們真的了解DOM嗎?</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Allen Shih</span>
+                            
+                                <span class="author-label">前端工程師</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2022-05-23 00:24:28</span>
+        <span class="mobile">2022-05-23 00:24</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-04-15 06:40:07</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/document/">document</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>14 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                <p>Dom 到底是甚麼呢?<br>其實 Dom 是一個<a class="link"   target="_blank" rel="noopener" href="https://www.w3.org/TR/WebIDL/" >定義<i class="fas fa-external-link-alt"></i></a>，是由 W3C WebIDL 所規定，宿主瀏覽器應用程式按此定義實現(底層為 C++)，<br>並且是一種資料結構，存在於<a class="link"   target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/zh-tw/WebKit"  title="Webkit">WebKit<i class="fas fa-external-link-alt"></i></a>的記憶體中。</p>
+<hr>
+<h2 id="瀏覽器如何實現-Dom"><a href="#瀏覽器如何實現-Dom" class="headerlink" title="瀏覽器如何實現 Dom"></a>瀏覽器如何實現 Dom</h2><p>之前提到 DOM 是存在於 Webkit 記憶體中的，而具體操作可以簡略成下圖<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/dom/%E5%85%A7%E9%83%A8%E9%97%9C%E4%BF%82%E5%9C%96.png"
+                      alt="內部關係圖"
+                ></p>
+<h2 id="映射物件和-V8binding"><a href="#映射物件和-V8binding" class="headerlink" title="映射物件和 V8binding"></a>映射物件和 V8binding</h2><p>而瀏覽器透過內部引擎與 WebKit(dom)進行綁定(v8 binding)，建立出一個可以在記憶體中訪問到的 <strong>映射物件(wrapper object)</strong> 。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/dom/bindingV8.png"
+                      alt="binding"
+                ></p>
+<p>v8 與 dom 的<a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/53de5e4deb43" >詳細實現<i class="fas fa-external-link-alt"></i></a>，而我們日常開發中在 devtools 看到畫面並不是 dom，而是<strong>渲染樹</strong>，是 DOM 和 CSSOM 的組合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前兩行執行後， v8 dom wrapper 與 c++ DOM 的綁定關係就完成</span></span><br><span class="line"><span class="keyword">var</span> div = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">div.<span class="property">innerHTML</span> = <span class="string">&quot;&lt;p&gt;&lt;span&gt;foo&lt;/span&gt;&lt;/p&gt;&quot;</span>;</span><br><span class="line"><span class="comment">// 測試下面程式碼</span></span><br><span class="line">div.<span class="property">xxx</span> = <span class="number">123</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(div);</span><br><span class="line">div = <span class="literal">null</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">lastChild</span>.<span class="property">xxx</span>; <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+
+<p>透過生成 Dom 的 api 會<strong>建立出映射</strong>，並存放在記憶體中，讓我們能夠進行操作，且不會被<strong>GC 回收</strong>。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/dom/DOM%E8%A8%98%E6%86%B6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96.png"
+                      alt="記憶體布局"
+                ></p>
+<p>由此圖我們可以瞭解，只要建造出映射，就算我們取消記憶體位置指向，映射仍會存在，DOM 仍然可以訪問，**<em>若要取消映射，只能透過 DOM api remove</em>**。</p>
+<blockquote>
+<p>DOM 是 JS 操作頁面的介面，但是 JS 不能直接對 DOM 增刪改查只能透過宿主提供 DOM API 間接操作。</p>
+<blockquote>
+<p>1.JS 夠過與 DOM 的映射關係操作頁面 2.頁面內容的控制 3.表格、表單資料事件 4.監聽各種使用者互動 5.懶加載其他資源 6.組件化、工程化開發複雜的應用</p>
+</blockquote>
+</blockquote>
+<hr>
+<h3 id="那有哪些可以創建元素，建立映射的方法呢"><a href="#那有哪些可以創建元素，建立映射的方法呢" class="headerlink" title="那有哪些可以創建元素，建立映射的方法呢?"></a>那有哪些可以創建元素，建立映射的方法呢?</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1.</span> <span class="title class_">Element</span>.<span class="property">innerHTML</span></span><br><span class="line"><span class="number">2.</span> <span class="title class_">DOMParser</span></span><br><span class="line"><span class="keyword">var</span> parser = <span class="keyword">new</span> <span class="title class_">DOMParser</span>();</span><br><span class="line"><span class="keyword">const</span> htmlString = <span class="string">&quot;&lt;strong&gt;Beware of the leopard&lt;/strong&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> doc3 = parser.<span class="title function_">parseFromString</span>(htmlString, <span class="string">&quot;text/html&quot;</span>);</span><br><span class="line"><span class="number">3.</span> <span class="title class_">Document</span>.<span class="property">createElementNS</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">createElementNS</span>(<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;endition&#x27;</span>)</span><br><span class="line">-&gt;<span class="language-xml"><span class="tag">&lt;<span class="name">endition</span>&gt;</span>​<span class="tag">&lt;/<span class="name">endition</span>&gt;</span></span>​</span><br><span class="line"><span class="number">4.</span> <span class="title class_">Document</span>.<span class="property">createElement</span></span><br><span class="line"><span class="number">5.</span> <span class="title class_">Document</span>.<span class="property">write</span></span><br><span class="line"><span class="number">6.</span> <span class="title class_">Document</span>.<span class="property">createDocumentFragment</span></span><br><span class="line"><span class="title class_">DocumentFragments</span> 是 <span class="variable constant_">DOM</span> 節點(<span class="title class_">Nodes</span>)。他們不會成為 <span class="variable constant_">DOM</span>主幹的一部份，需要append加入 <span class="variable constant_">DOM</span> 樹。</span><br><span class="line"><span class="number">7.</span> <span class="title class_">Document</span>.<span class="property">createTextNode</span></span><br><span class="line">建立文字節點</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Dom-的組成"><a href="#Dom-的組成" class="headerlink" title="Dom 的組成"></a>Dom 的組成</h2><p>標準定義的 DOM 由三大部分構成: 1.節點 2.事件 3.選擇區域(Range AP)</p>
+<h3 id="節點-Node"><a href="#節點-Node" class="headerlink" title="節點(Node)"></a>節點(Node)</h3><p><strong>標籤</strong>是 HTML 的基本單位，如:p、div、h1、input 等。<br><strong>節點</strong>是 DOM 的基本單位，一個具有標準結構化模型的文件，有 Element、Text、註解等,共有 12 種節點<a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Node" >MDN<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>其中 Element &lt;&#x3D;&gt; HTML 標籤，是互相對應的關係。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>hello world!<span class="tag">&lt;<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>h2 是標籤，在 DOM 內部會生成兩個節點。</p>
+<ul>
+<li><p>Element Node:h2</p>
+</li>
+<li><p>Text Node:”hello world!”</p>
+</li>
+</ul>
+<blockquote>
+<p>Document 文件<br><strong>指任何一個結構化的文件</strong>：<br>XML Document - 一個 XML 標準模型的文件<br>HTML Document - 一個 HTML 標準模型的文件<br>JSON Document - 一個 JSON 標準模型的文件</p>
+<blockquote>
+<p><strong>瀏覽器的 document 對象是一個 DOM wrapper object 綁定整顆 DOM 的根</strong>，並掛載於 Global Object 上(如記憶體布局圖)，它們<a class="link"   target="_blank" rel="noopener" href="https://www.796t.com/post/YjJ2dWc=.html"  title="dom繼承">互相繼承<i class="fas fa-external-link-alt"></i></a>(document -&gt; HTMLDocument.prototype -&gt; Document.prototype -&gt; Node.prototype)，並可以往上回溯至 object.prototype。</p>
+</blockquote>
+</blockquote>
+<hr>
+<h3 id="Element-元素"><a href="#Element-元素" class="headerlink" title="Element 元素"></a>Element 元素</h3><p>屬於程式語言中的語義，在 HTML 中叫 Tag、在 CSS 的表現中稱作 盒 Box。<br>所謂的操作 DOM 就是對 節點 Node 做 增刪改查、監聽、綁事件。</p>
+<p><strong><em>Element.prototype</em></strong> 所有元素的共同方法。</p>
+<blockquote>
+<p>若使用創建元素，建立映射的方法，則該元素的<strong>proto</strong>會指向此原型方法，裡面有各種元素操作函數，標籤各自的特別屬性、不同標籤預設的行為樣式等等。</p>
+</blockquote>
+<hr>
+<p><strong><em>Document.prototype</em></strong> 是 document 的共同方法。</p>
+<blockquote>
+<p>是一份 xml 文件的根、總稱，掛載了許多 Dom 公共函數，還有瀏覽器的一些訊息(網址、跟引擎相關的 load ready)，html 標籤集合(document.all)等等，它的語義涵蓋 html、dom、文件，因為總總歷史因素，裡面有需多方法跟資料。</p>
+</blockquote>
+<hr>
+<h2 id="DOM-Tree"><a href="#DOM-Tree" class="headerlink" title="DOM Tree"></a>DOM Tree</h2><p>描述 DOM 的一種稱呼，與 DOM 一樣，指 WebKit 記憶體內部的 Object，只不過講 DOM Tree 時，重點是<strong>在樹形結構</strong>，而若是講 DOM 時，則是在對比 JS 中的<strong>Wrapper object</strong>。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/dom/DomTree.png"
+                      alt="DOM Tree"
+                ></p>
+<hr>
+<h3 id="NodeList-與-HTMLCollection"><a href="#NodeList-與-HTMLCollection" class="headerlink" title="NodeList 與 HTMLCollection"></a>NodeList 與 HTMLCollection</h3><ul>
+<li>NodeList 靜態&#x2F;動態集合，包含所有的 Node 節點 Element、Text、屬性、註解，等 12 種節點(querySelector 系列)</li>
+<li>HTMLCollection 動態集合，只有 Element 1 種節點 (getElement 系列)</li>
+</ul>
+<hr>
+<h2 id="重排與重繪"><a href="#重排與重繪" class="headerlink" title="重排與重繪"></a>重排與重繪</h2><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/images/dom/webkit_render.png"
+                      alt="Repaint ReFlow"
+                ></p>
+<p>頁面生成過程：</p>
+<ol>
+<li>HTML 被 HTML 解析器解析成 DOM 樹</li>
+<li>CSS 被 CSS 解析器解析成 CSSOM 樹</li>
+<li>DOM 樹 + CSSOM 樹，生成一棵渲染樹(Render Tree)</li>
+<li>生成佈局 (flow)瀏覽器在屏幕上畫出所有節點</li>
+<li>將佈局繪製(paint)在屏幕上，顯示出整個頁面</li>
+<li>第四步和第五步是最耗時的部分 這兩步合起來，就是我們通常所說的渲染</li>
+</ol>
+<p><strong>重排&#x2F;回流（Reflow）</strong>：當 DOM 的變化影響了元素的幾何信息，瀏覽器需要重新計算元素大小寬高等屬性，將其安排在正確的位置，就叫重排，為重新生成布局，重新排列。<br><strong>重繪(Repaint)</strong>: 當一元素的外觀產生變化，但没有改變布局,重新把元素外觀繪製出来的過程，叫做重繪。<br><strong><em>任何改變渲染樹的操作都會導致重排或重繪,重排必定重繪</em></strong></p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://csstriggers.com/" >css 重繪<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<hr>
+<h2 id="Dom-與-VDom"><a href="#Dom-與-VDom" class="headerlink" title="Dom 與 VDom"></a>Dom 與 VDom</h2><p>直接進行 DOM 操作的會何會影響性能?</p>
+<ul>
+<li>頻繁的 DOM 操作會導致重排、重繪，會讓瀏覽器在 v8 與 WebKit 兩個 thread 之間來回切換(只能擇一)，</li>
+<li>兩個引擎 thread 來回切換就會造成 <strong>「性能損耗」</strong> 。</li>
+<li>因此現代框架，為了避免頻繁的操作 DOM 的，自然而然就有了虛擬 DOM 的概念。</li>
+</ul>
+<p>vDOM 的設計</p>
+<ul>
+<li>用 JS object 模擬 DOM 就是 vdom (Vue Vnode)</li>
+<li>當頁面的數據變動時，產生新的 vdom(vue 副作用 effect 時，響應式產生，Diff 比對)</li>
+<li>比較兩個 vdom 的差異(Vue Diff 演算，雙端 Diff，快速 Diff)</li>
+<li>差異的部分透過 DOM API 映射到真實 DOM 上(Vue renderer)</li>
+</ul>
+<h2 id="分類整理-API"><a href="#分類整理-API" class="headerlink" title="分類整理 API"></a>分類整理 API</h2><p>來源 MDN</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">---查驗文檔</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="property">readyState</span></span><br><span class="line">  -  屬性描述文件的讀取狀態</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="property">title</span></span><br><span class="line">  - 文檔標題</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="property">visibilityState</span></span><br><span class="line">  - 返回<span class="variable language_">document</span>的可见性, 即当前可见元素的上下文环境. 由此可以知道当前文档(即为页面)是在背后, 或是不可见的隐藏的标签</span><br><span class="line"></span><br><span class="line">----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---寫文檔</span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">write</span>()</span><br><span class="line">  - <span class="variable language_">document</span>.<span class="title function_">write</span>(markup);</span><br><span class="line">  - 方法将一个文本字符串写入一个由 <span class="variable language_">document</span>.<span class="title function_">open</span>() 打开的文档流（<span class="variable language_">document</span> stream）。</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">--- 全頻相關</span><br><span class="line"><span class="title class_">Document</span>.<span class="property">webkitFullscreenEnabled</span></span><br><span class="line">  - 全屏啟用”屬性指示全屏模式是否可用。</span><br><span class="line"><span class="title class_">Document</span>.<span class="property">webkitIsFullScreen</span></span><br><span class="line">  - 是否在全屏模式。</span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">exitFullscreen</span>()</span><br><span class="line">  - 用于让当前文档退出全屏模式</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">fullscreenElement</span> <span class="comment">//返回当前文档中正在以全屏模式显示的Element节点,如果没有使用全屏模式,则返回null.</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">fullscreenEnabled</span> <span class="comment">//返回一个布尔值,表明浏览器是否支持全屏模式.</span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--- <span class="title class_">Range</span> 物件</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">createRange</span>()</span><br><span class="line">  -  <span class="title class_">Range</span> 物件。(可用來當富文本切割)</span><br><span class="line">  - <span class="keyword">var</span> range = <span class="variable language_">document</span>.<span class="title function_">createRange</span>();</span><br><span class="line">    range.<span class="title function_">setStart</span>(startNode, startOffset);</span><br><span class="line">    range.<span class="title function_">setEnd</span>(endNode, endOffset);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">caretRangeFromPoint</span>()</span><br><span class="line">  - <span class="keyword">var</span> range = <span class="variable language_">document</span>.<span class="title function_">caretRangeFromPoint</span>(float x, float y);</span><br><span class="line">  - 返回一个 <span class="title class_">Range</span> 对象（指定坐标的文档片段）。</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--- 創建類(<span class="title class_">Dom</span>/元素/comment/event)</span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">createAttribute</span>()</span><br><span class="line">  - attribute = <span class="variable language_">document</span>.<span class="title function_">createAttribute</span>(name)</span><br><span class="line">  - 创建并返回一个新的属性节点</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">createElement</span>()</span><br><span class="line">  - <span class="variable language_">document</span>.<span class="title function_">createElement</span>(tagName[, options]);</span><br><span class="line">  - 创建一个由标签名称 tagName 指定的 <span class="variable constant_">HTML</span> 元素。如果用户代理无法识别 tagName，则会生成一个未知 <span class="variable constant_">HTML</span> 元素 <span class="title class_">HTMLUnknownElement</span>。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">createDocumentFragment</span>()</span><br><span class="line">  - <span class="keyword">let</span> fragment = <span class="variable language_">document</span>.<span class="title function_">createDocumentFragment</span>();</span><br><span class="line">  - 创建一个新的空白的文档片段，文档片段存在于内存中，并不在<span class="variable constant_">DOM</span>树中，</span><br><span class="line">  - 所以将子元素插入到文档片段时不会引起页面回流（对元素位置和几何上的计算）。因此，使用文档片段通常会带来更好的性能。</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--- 獲取元素資訊</span><br><span class="line"></span><br><span class="line"><span class="title class_">Node</span>.<span class="property">nodeType</span>  <span class="comment">//唯讀屬性表示了節點物件的類型。</span></span><br><span class="line">  -  <span class="variable language_">document</span>.<span class="property">nodeType</span> <span class="number">9</span> (<span class="title class_">Node</span>.<span class="property">DOCUMENT_NODE</span>)</span><br><span class="line"></span><br><span class="line"><span class="title class_">Node</span>.<span class="property">previousSibling</span> <span class="comment">//返回当前节点的前一个兄弟节点</span></span><br><span class="line"><span class="title class_">Element</span>.<span class="property">nextElementSibling</span> <span class="comment">// 返回当前元素在其父元素的子元素节点中的后一个元素节点,如果该元素已经是最后一个元素节点,则返回null</span></span><br><span class="line"><span class="title class_">Element</span>.<span class="property">previousElementSibling</span>  <span class="comment">//返回当前元素在其父元素的子元素节点中的前一个元素节点,如果该元素已经是第一个元素节点,则返回null</span></span><br><span class="line"><span class="title class_">Element</span>.<span class="property">classList</span> <span class="comment">//唯讀屬性代表了該元素所擁有之類別屬性（Class Attribute）的即時更新集－DOMTokenList。</span></span><br><span class="line"><span class="title class_">Element</span>.<span class="property">className</span>  <span class="comment">// 获取或设置指定元素的class属性的值。</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="property">innerHTML</span> <span class="comment">// 屬性獲取或設置元素中包含的HTML或XML標記</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">getBoundingClientRect</span>()</span><br><span class="line">  - 返回元素的大小及其相对于视口的位置。</span><br><span class="line">  - 如果是标准盒子模型，元素的尺寸等于width/height + padding + border-width的总和。</span><br><span class="line">  - 如果box-<span class="attr">sizing</span>: border-box，元素的的尺寸等于 width/height。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">querySelector</span>()</span><br><span class="line">  - baseElement.<span class="title function_">querySelector</span>(selectors)</span><br><span class="line">  - 返回与指定的选择器组匹配的元素的后代的第一个元素。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">querySelectorAll</span>()</span><br><span class="line">  - 返回一个non-live的<span class="title class_">NodeList</span>, 它包含所有元素的非活动节点，该元素来自与其匹配指定的<span class="variable constant_">CSS</span>选择器组的元素。</span><br><span class="line">  - baseElement.<span class="title function_">querySelectorAll</span>(selectors);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Node</span>.<span class="title function_">cloneNode</span>()</span><br><span class="line"> - <span class="keyword">var</span> dupNode = node.<span class="title function_">cloneNode</span>(deep&#123;<span class="literal">true</span>||<span class="literal">false</span>&#125;); <span class="comment">//如果为true,则该节点的所有后代节点也都会被克隆</span></span><br><span class="line">  - fn 回傳一個呼叫此方法之節點物件的拷貝</span><br><span class="line"><span class="title class_">Node</span>.<span class="title function_">contains</span>()</span><br><span class="line">  - <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">contains</span>(node) ex. <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">contains</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;body&#x27;</span>) <span class="comment">//true</span></span><br><span class="line">  - 返回的是一个布尔值，来表示传入的节点是否为该节点的后代节点</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">getElementById</span>()</span><br><span class="line">  - <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(id);</span><br><span class="line">  - 返回一个匹配特定 <span class="variable constant_">ID</span>的元素.</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">getElementsByClassName</span>()</span><br><span class="line">  - <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(names);</span><br><span class="line">  - 返回一个包含了所有指定类名的子元素的类数组对象。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">getElementsByName</span>()</span><br><span class="line">  -  <span class="variable language_">document</span>.<span class="title function_">getElementsByName</span>(name)</span><br><span class="line">  - 返回一个在 (X)<span class="variable constant_">HTML</span> <span class="variable language_">document</span>的节点列表集合。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Document</span>.<span class="title function_">getElementsByTagName</span>()</span><br><span class="line">  -  <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(name);</span><br><span class="line">  - 返回一个包括所有给定标签名称的元素的<span class="variable constant_">HTML</span>集合<span class="title class_">HTMLCollection</span>。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">getAttribute</span>()</span><br><span class="line">  - align = div1.<span class="title function_">getAttribute</span>(<span class="string">&quot;align&quot;</span>);</span><br><span class="line">  - 函式會回傳該網頁元素的屬性。 如果該屬性不存在，其回傳值會是<span class="literal">null</span>或 <span class="string">&quot;&quot;</span> (空字串);</span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">getAttributeNS</span>()</span><br><span class="line">  - 命名空间仅在 <span class="variable constant_">XML</span> 文档中受支持</span><br><span class="line">  - 返回具有指定命名空间和名称的属性的字符串值。如果命名属性不存在，则返回值将为 <span class="literal">null</span> 或 <span class="string">&quot;&quot;</span> （空字符串）</span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">getAttributeNames</span>()</span><br><span class="line">  - <span class="keyword">let</span> attributeNames = element.<span class="title function_">getAttributeNames</span>();</span><br><span class="line">  - 返回一个<span class="title class_">Array</span>，该数组包含指定元素（<span class="title class_">Element</span>）的所有属性名称，如果该元素不包含任何属性，则返回一个空数组。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">hasAttribute</span>()</span><br><span class="line">  - element.<span class="title function_">hasAttribute</span>(attName);</span><br><span class="line">  - 返回一个布尔值，指示该元素是否包含有指定的属性（attribute）</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--- 設定元素</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="property">attributes</span> <span class="comment">//把特定節點裡所有的屬性變成一個集合,然後回傳出來 // NamedNodeMap 並非一個陣列.attributes 是一個鍵/值的配對</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">toggleAttribute</span>()</span><br><span class="line">  - <span class="title class_">Element</span>.<span class="title function_">toggleAttribute</span>(name [, force]);</span><br><span class="line">  - 切换给定元素的某个布尔值属性的状态（如果属性不存在则添加属性，属性存在则移除属性）</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">setAttribute</span>()</span><br><span class="line">  - element.<span class="title function_">setAttribute</span>(name, value);</span><br><span class="line">  - 设置指定元素上的某个属性值。如果属性已经存在，则更新该值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">before</span>()</span><br><span class="line">  - child.<span class="title function_">before</span>(span);</span><br><span class="line">  - 方法可以在<span class="title class_">ChildNode</span>这个节点的父节点中插入一些列的 <span class="title class_">Node</span> 或者 <span class="title class_">DOMString</span> 对象，</span><br><span class="line">  - 位置就是在<span class="title class_">ChildNode</span>节点的前面，<span class="title class_">DOMString</span> 对象其实和 <span class="title class_">Text</span>节点一样的方式来完成插入的。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">after</span>()</span><br><span class="line">  - <span class="title function_">after</span>(... nodes)</span><br><span class="line">  - 方法会在其父节点的子节点列表中插入一些 <span class="title class_">Node</span> 或 <span class="title class_">DOMString</span> 对象。插入位置为该节点之后。<span class="title class_">DOMString</span> 对象会被以 <span class="title class_">Text</span> 的形式插入。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">append</span>()</span><br><span class="line">  - parent.<span class="title function_">append</span>(p);</span><br><span class="line">  - 在 <span class="title class_">Element</span>的最后一个子节点之后插入一组 <span class="title class_">Node</span> 对象或 <span class="title class_">DOMString</span> 对象。</span><br><span class="line">  - 没有返回值, <span class="title class_">Node</span>.<span class="title function_">appendChild</span>() 返回追加對象</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">prepend</span>()</span><br><span class="line">  - <span class="title class_">Element</span>.<span class="title function_">prepend</span>((<span class="title class_">Node</span> or <span class="title class_">DOMString</span>)... nodes);</span><br><span class="line">  - 在父节点的第一个子节点之前插入一系列<span class="title class_">Node</span>对象或者<span class="title class_">DOMString</span>对象。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">insertAdjacentElement</span>()</span><br><span class="line">  - element.<span class="title function_">insertAdjacentElement</span>(position, element);</span><br><span class="line">  - activeElem.<span class="title function_">insertAdjacentElement</span>(<span class="string">&#x27;afterend&#x27;</span>,div)</span><br><span class="line">  - 将一个给定的元素节点插入到相对于被调用的元素的给定的一个位置。</span><br><span class="line">  <span class="string">&#x27;beforebegin&#x27;</span>: 在该元素本身的前面.</span><br><span class="line">  <span class="string">&#x27;afterbegin&#x27;</span>:只在该元素当中, 在该元素第一个子孩子前面.</span><br><span class="line">  <span class="string">&#x27;beforeend&#x27;</span>:只在该元素当中, 在该元素最后一个子孩子后面.</span><br><span class="line">  <span class="string">&#x27;afterend&#x27;</span>: 在该元素本身的后面.</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">insertAdjacentHTML</span>()</span><br><span class="line">  -<span class="title function_">insertAdjacentHTML</span>() 把傳入的字串解析成 <span class="variable constant_">HTML</span> 或 <span class="variable constant_">XML</span>，並把該節點插入到 <span class="variable constant_">DOM</span> 樹指定的位置。</span><br><span class="line">  -它不會重新解析被使用的元素，因此他不會破壞該元素裡面原有的元素。</span><br><span class="line">  - element.<span class="title function_">insertAdjacentHTML</span>(position, text);</span><br><span class="line">  - position like top</span><br><span class="line">  - d1.<span class="title function_">insertAdjacentHTML</span>(<span class="string">&#x27;afterend&#x27;</span>, <span class="string">&#x27;&lt;div id=&quot;two&quot;&gt;two&lt;/div&gt;&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">insertAdjacentText</span>()</span><br><span class="line">  - 将一个给定的文本节点插入在相对于被调用的元素给定的位置。</span><br><span class="line">  - element.<span class="title function_">insertAdjacentText</span>(position, element);</span><br><span class="line">  - position like top</span><br><span class="line">  - para.<span class="title function_">insertAdjacentText</span>(<span class="string">&#x27;afterbegin&#x27;</span>,textInput.<span class="property">value</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">replaceChildren</span>()</span><br><span class="line">  - <span class="title class_">Element</span>.<span class="title function_">replaceChildren</span>(...nodesOrDOMStrings)</span><br><span class="line">  - 将一个 <span class="title class_">Node</span> 的后代替换为指定的后代集合。这些新的后代可以为 <span class="title class_">DOMString</span> 或 <span class="title class_">Node</span> 对象</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">replaceWith</span>()</span><br><span class="line">  - child.<span class="title function_">replaceWith</span>(span);</span><br><span class="line">  - <span class="title class_">Node</span> 对象或者 <span class="title class_">DOMString</span> 对象，替换了该节点父节点下的子节点 。</span><br><span class="line"></span><br><span class="line">----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---移除</span><br><span class="line"></span><br><span class="line"><span class="title class_">Node</span>.<span class="title function_">removeChild</span>()</span><br><span class="line">  - node.<span class="title function_">removeChild</span>(child);</span><br><span class="line">  -從 <span class="variable constant_">DOM</span> 移除一個子節點，並傳回移除的節點。 可刪除被v8binding的 dom映射，立即無法使用且不可挽回。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Node</span>.<span class="title function_">replaceChild</span>()</span><br><span class="line">  - parentNode.<span class="title function_">replaceChild</span>(newChild, oldChild);</span><br><span class="line">  - 用指定的节点替换当前节点的一个子节点，并返回被替换掉的节点。</span><br><span class="line">  - 可探討<span class="variable constant_">DOM</span> binding 還在嗎?</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">remove</span>()</span><br><span class="line">  - node.<span class="title function_">remove</span>();</span><br><span class="line">  - 把对象从它所属的 <span class="variable constant_">DOM</span> 树中删除。</span><br><span class="line"></span><br><span class="line"><span class="title class_">Element</span>.<span class="title function_">removeAttribute</span>()</span><br><span class="line">  - element.<span class="title function_">removeAttribute</span>(attrName);</span><br><span class="line">  - 指定的元素中删除一个属性。</span><br><span class="line"></span><br><span class="line">----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">location  对象的位置（<span class="variable constant_">URL</span>),含有文檔的 <span class="variable constant_">URL</span> 相關的信息，并提供了改變該 <span class="variable constant_">URL</span> 和加載其他 <span class="variable constant_">URL</span> 的方法。</span><br><span class="line">----</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span> === <span class="variable language_">window</span>.<span class="property">location</span> 接口位置相等</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">href</span> <span class="comment">//url整個</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">host</span> <span class="comment">//返回域名(包含port) 192.168.31.121:8080</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">search</span>  <span class="comment">//返回URL参数包含(?)</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">hash</span>   <span class="comment">// 返回標示符URL参数包含(#)。</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">reload</span> <span class="comment">// fn重仔頁面資源</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">replace</span> <span class="comment">// fn 用給定的URl跳轉至該頁面，不會有紀錄</span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可設定功能類型</span><br><span class="line">---</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">designMode</span> <span class="comment">// 控制整個文件是否能夠編輯 = &quot;on&quot; || &quot;off&quot;</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">dir</span> <span class="comment">// 文档的文字朝向 = &#x27;ltr&#x27; || &#x27;rtl&#x27;</span></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料及引用"><a href="#參考資料及引用" class="headerlink" title="參考資料及引用"></a>參考資料及引用</h2><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://bitsofco.de/what-exactly-is-the-dom/" >What, exactly, is the DOM?<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.gushiciku.cn/pl/gFY6/zh-tw" >Virtual DOM<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/question/324992717/answer/707044362" >前端为什么操作 DOM 是最耗性能的呢？<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/53de5e4deb43" >v8<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/question/269333790/answer/350467595" >document 与 element 上的函数为什么不是一个?<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://html5.tool.webfrontend.dev/" >HTML 標籤週期表<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/111testing/p/11186335.html" >渲染過程<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://chromium.googlesource.com/chromium/src.git/+/62.0.3178.1/third_party/WebKit/Source/bindings/core/v8/V8BindingDesign.md" >chorme BindingDesign<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/document/">#document</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/frontend-001/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">前端轉職很簡單？</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/functional-programming/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">簡易函式封裝</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    
+<div class="comments-container">
+    <div id="comments-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;Comments
+    </div>
+    
+        
+            
+
+    <div class="gitalk-comment-container">
+        <div id="gitalk-container"></div>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+        <script  src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+        <script >
+          function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+              __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+              Gitalk && new Gitalk({
+                clientID: 'b57e764afef07bde3085',
+                clientSecret: '7b8d5b15886c8be0aaaac7fe3945bd94a6aff797',
+                repo: 'eepson123tw.gitalk',
+                owner: 'eepson123tw',
+                admin: 'eepson123tw',
+                id: __gitalk__pathname,
+                language: 'en'
+              }).render('gitalk-container');
+            } catch (e) {
+              window.Gitalk = null;
+            }
+          }
+
+          if ('false' === 'true') {
+            const loadGitalkTimeout = setTimeout(() => {
+              loadGitalk();
+              clearTimeout(loadGitalkTimeout);
+            }, 1000);
+          } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+          }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%80%8F%E8%A6%BD%E5%99%A8%E5%A6%82%E4%BD%95%E5%AF%A6%E7%8F%BE-Dom"><span class="nav-number">1.</span> <span class="nav-text">瀏覽器如何實現 Dom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E7%89%A9%E4%BB%B6%E5%92%8C-V8binding"><span class="nav-number">2.</span> <span class="nav-text">映射物件和 V8binding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%AF%E4%BB%A5%E5%89%B5%E5%BB%BA%E5%85%83%E7%B4%A0%EF%BC%8C%E5%BB%BA%E7%AB%8B%E6%98%A0%E5%B0%84%E7%9A%84%E6%96%B9%E6%B3%95%E5%91%A2"><span class="nav-number">2.1.</span> <span class="nav-text">那有哪些可以創建元素，建立映射的方法呢?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dom-%E7%9A%84%E7%B5%84%E6%88%90"><span class="nav-number">3.</span> <span class="nav-text">Dom 的組成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%80%E9%BB%9E-Node"><span class="nav-number">3.1.</span> <span class="nav-text">節點(Node)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Element-%E5%85%83%E7%B4%A0"><span class="nav-number">3.2.</span> <span class="nav-text">Element 元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-Tree"><span class="nav-number">4.</span> <span class="nav-text">DOM Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NodeList-%E8%88%87-HTMLCollection"><span class="nav-number">4.1.</span> <span class="nav-text">NodeList 與 HTMLCollection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%8E%92%E8%88%87%E9%87%8D%E7%B9%AA"><span class="nav-number">5.</span> <span class="nav-text">重排與重繪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dom-%E8%88%87-VDom"><span class="nav-number">6.</span> <span class="nav-text">Dom 與 VDom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%9E%E6%95%B4%E7%90%86-API"><span class="nav-number">7.</span> <span class="nav-text">分類整理 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E5%8F%8A%E5%BC%95%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">參考資料及引用</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2021</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Allen Shih</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>

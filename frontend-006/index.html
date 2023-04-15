@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Allen Shih">
+    
+    <title>
+        
+            Type與Interface的差異 |
+        
+        Allen Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo/favicon.png">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"eepson123tw.github.io","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#9999CC","avatar":"/images/avatar.svg","favicon":"/images/logo/favicon.png","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"圍繞核心，漸進增強!"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":true},"comment":{"enable":true,"use":"gitalk","gitalk":{"github_id":"eepson123tw","repository":"eepson123tw.gitalk","client_id":"b57e764afef07bde3085","client_secret":"7b8d5b15886c8be0aaaac7fe3945bd94a6aff797","owner":"eepson123tw","admin":["eepson123tw"]}},"post":{"word_count":{"enable":true,"wordcount":true,"min2read":true},"author_label":{"enable":true,"auto":false,"custom_label_list":["轉職打工仔","前端工程師","愛發文的前端工程師"]}},"version":"3.5.2"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Allen" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo/logo_transparent.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Allen Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">Type與Interface的差異</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Allen Shih</span>
+                            
+                                <span class="author-label">前端工程師</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-01-30 21:23:41</span>
+        <span class="mobile">2023-01-30 21:23</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-04-15 06:40:07</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/TypeScript/">TypeScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Type/">Type</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Interface/">Interface</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>915 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                <p>最近在學習TypeScript時，覺得Type跟Interface這兩種定義型別的方式，有種若即若離的關係，<br>定義型別何時要用type、何時要用Interface呢?自己也無法解釋的很清楚，於是想把在網路上找到的知識，<br>以及自己的實作做些統整，加深自己的記憶點。</p>
+<hr>
+<h1 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h1><p>定義型別的一種方法，可採用顯式的定義，也可使用隱式的類型推斷，常用來定義較為簡易的型別類型(較為推薦)，<br>對定義之型別，有較多的操作空間，TypeScript提供了許多工具類型的type供我們使用。可以表示原始類型、聯合類型、元組類型和物件類型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//簡易地定義屬性</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Apple</span> = <span class="built_in">string</span> </span><br><span class="line"><span class="comment">//以物件類型定義屬性</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Allen</span> =&#123;</span><br><span class="line">  <span class="attr">year</span>:<span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">kind</span>:<span class="built_in">string</span>;</span><br><span class="line">  <span class="variable constant_">IQ</span>?:<span class="built_in">number</span>; =&gt;?代表選填</span><br><span class="line">  ():<span class="function"><span class="params">string</span> =&gt;</span> 可以被執行</span><br><span class="line">  [<span class="attr">key</span>:<span class="built_in">string</span>]:<span class="function"><span class="params">any</span> =&gt;</span>可以接受任何 index</span><br><span class="line">  <span class="keyword">new</span> (<span class="attr">allen</span>:<span class="built_in">string</span>):<span class="function"><span class="params">string</span> =&gt;</span> 可以被實例化</span><br><span class="line">  <span class="keyword">readonly</span> <span class="attr">weight</span>:<span class="function"><span class="params">number</span> =&gt;</span>只讀屬性</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params">s:allen</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>( s.<span class="property">IQ</span>,s.<span class="property">year</span>, <span class="title function_">s</span>())</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">s</span>(<span class="string">&#x27;allen&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment">//工具類型操作 getType </span></span><br><span class="line"> <span class="keyword">type</span> <span class="title class_">GetType</span>&lt;T,K <span class="keyword">extends</span> keyof T&gt; = &#123;[S <span class="keyword">in</span> K]:T[S]&#125;</span><br><span class="line"> <span class="keyword">type</span> c = <span class="title class_">GetType</span>&lt;allen, <span class="string">&#x27;year&#x27;</span>&gt; </span><br><span class="line"> <span class="comment">//type c = &#123;</span></span><br><span class="line"> <span class="comment">//   year: number;</span></span><br><span class="line"> <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//工具類型操作 exclude </span></span><br><span class="line"><span class="comment">//利用簡單型別的分配律，去除限制型別，可以把 extends視為限制的關鍵，T 必須符合 K 的條件。</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">ExcludeType</span>&lt;T,K <span class="keyword">extends</span> T&gt; =  T <span class="keyword">extends</span> K ?  <span class="built_in">never</span> : T</span><br><span class="line"><span class="keyword">type</span> a = <span class="title class_">ExcludeType</span>&lt;<span class="string">&#x27;year&#x27;</span> | <span class="string">&#x27;age&#x27;</span> |<span class="string">&#x27;now&#x27;</span>, <span class="string">&#x27;year&#x27;</span>&gt; <span class="comment">// age,now</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//去除readOnly屬性 -號可以去除modified修飾詞，預設是+readonly，不用+是因為ts編譯時幫我們加上去了。</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Book</span> =&#123;</span><br><span class="line">  <span class="keyword">readonly</span> <span class="attr">buyYear</span>:<span class="built_in">number</span>;</span><br><span class="line">  <span class="keyword">readonly</span> <span class="attr">kind</span>:<span class="built_in">string</span>;</span><br><span class="line">  <span class="keyword">readonly</span> <span class="attr">cost</span>:<span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">ReadonlyRemove</span>&lt;T&gt; = &#123;-<span class="keyword">readonly</span>[S <span class="keyword">in</span> keyof T ]:T[S]&#125;</span><br><span class="line"><span class="keyword">type</span> x = <span class="title class_">ReadonlyRemove</span>&lt;<span class="title class_">Book</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h1><p>用來形容或描述物件的結構或屬性的型別，也因為Js有許多物件結構的描述，較能用來描述這些預設的js行為~</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> myInterFace&#123;</span><br><span class="line">  [<span class="attr">propname</span>:<span class="built_in">string</span>]:<span class="built_in">any</span>,</span><br><span class="line">  <span class="attr">name</span>:<span class="built_in">string</span>,</span><br><span class="line">  age?:<span class="built_in">number</span>,  </span><br><span class="line">  <span class="title function_">say</span>():<span class="built_in">string</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> myInterFace&#123;</span><br><span class="line">  <span class="attr">gender</span>:<span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">obj</span>:myInterFace = &#123;</span><br><span class="line">  <span class="attr">name</span>:<span class="string">&#x27;123&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>:<span class="number">12</span>,</span><br><span class="line">  <span class="attr">gender</span>:<span class="string">&#x27;12312313123&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//定義class時 可以使用 interface規範 所需的屬性</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Myclass</span> <span class="title function_">implements</span>(實現) myInterFace&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 繼承(擴充)</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Myclass</span> <span class="keyword">extends</span> myInterFace&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//當然也可以這樣使用</span></span><br><span class="line"><span class="keyword">interface</span> cake&lt;T,K&gt;&#123;</span><br><span class="line">  <span class="attr">cost</span>:T,</span><br><span class="line">  <span class="attr">size</span>:K</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">a</span>:cake&lt;<span class="built_in">number</span>,<span class="built_in">string</span>&gt; =&#123;</span><br><span class="line">  <span class="attr">cost</span>:<span class="number">18</span>,</span><br><span class="line">  <span class="attr">size</span>:<span class="string">&quot;big&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>補充 [key:string|number|symbol] 若建立key必須符合以下型別，不然會ERROR。</strong></p>
+<hr>
+<h1 id="Type-vs-Interface"><a href="#Type-vs-Interface" class="headerlink" title="Type vs Interface"></a>Type vs Interface</h1><p><strong>與interface的差異在於無法重複覆值，沒有overload特性及merging特性，並且不能繼承實作物件與其屬性。</strong><br>而且語意上也有些需差異，需要多方評估後挑適合的使用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Allen</span> = &#123;<span class="attr">year</span>:<span class="built_in">number</span>,<span class="attr">height</span>:<span class="built_in">number</span>&#125; &lt;-顯式定義</span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Allen</span> = &#123;<span class="attr">kind</span>:<span class="built_in">string</span>&#125; &lt;- <span class="title class_">Duplicate</span> identifier <span class="string">&#x27;Allen&#x27;</span> 無法合併</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Hellen</span> &#123;<span class="attr">year</span>:<span class="built_in">number</span>,<span class="attr">height</span>:<span class="built_in">number</span>&#125;</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Hellen</span> &#123;<span class="attr">kind</span>:<span class="built_in">string</span>&#125; &lt;- <span class="title class_">Hellen</span>屬性中有year,height,<span class="function"><span class="params">kind</span> =&gt;</span> merging 合併了</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> cake&#123;</span><br><span class="line">  <span class="attr">cost</span>:<span class="built_in">string</span>,</span><br><span class="line">  <span class="attr">size</span>:<span class="built_in">number</span>,</span><br><span class="line">  <span class="title function_">match</span>(<span class="attr">s</span>:<span class="built_in">string</span>):<span class="built_in">void</span>; <span class="comment">//overload</span></span><br><span class="line">  <span class="title function_">match</span>(<span class="attr">s</span>:<span class="built_in">number</span>):<span class="built_in">number</span>; <span class="comment">//overload</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">testOne</span> (<span class="attr">a</span>:cake):<span class="built_in">number</span>&#123;</span><br><span class="line"><span class="comment">//  return a.match(&#x27;s&#x27;) // string</span></span><br><span class="line"> <span class="keyword">return</span> a.<span class="title function_">match</span>(<span class="number">18</span>) <span class="comment">//number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//例如 哪一個更符合座標物件的型別描述呢?</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Point</span> = [<span class="built_in">number</span>, <span class="built_in">number</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">y</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>簡單下個結論，就是使用前先思考要定義的是原始的型別，亦或是物件型別，若是物件型別是否需要操作其中的屬性，<br>還是單純的表示構造屬性，若需要操作就可以考慮type，反之則可以使用interface做為表示~</p>
+<p>若有不同的看法，歡迎在下方留言~</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.typescriptlang.org/cheatsheets" >TypeScript官網描述<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://basarat.gitbook.io/typescript" >TypeScript DeepDive<i class="fas fa-external-link-alt"></i></a></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Type/">#Type</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Interface/">#Interface</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/frontend-007/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">面對複雜的需求時，應該...?</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/review2022/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2022年度回顧</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    
+<div class="comments-container">
+    <div id="comments-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;Comments
+    </div>
+    
+        
+            
+
+    <div class="gitalk-comment-container">
+        <div id="gitalk-container"></div>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+        <script  src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+        <script >
+          function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+              __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+              Gitalk && new Gitalk({
+                clientID: 'b57e764afef07bde3085',
+                clientSecret: '7b8d5b15886c8be0aaaac7fe3945bd94a6aff797',
+                repo: 'eepson123tw.gitalk',
+                owner: 'eepson123tw',
+                admin: 'eepson123tw',
+                id: __gitalk__pathname,
+                language: 'en'
+              }).render('gitalk-container');
+            } catch (e) {
+              window.Gitalk = null;
+            }
+          }
+
+          if ('false' === 'true') {
+            const loadGitalkTimeout = setTimeout(() => {
+              loadGitalk();
+              clearTimeout(loadGitalkTimeout);
+            }, 1000);
+          } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+          }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Type"><span class="nav-number">1.</span> <span class="nav-text">Type</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interface"><span class="nav-number">2.</span> <span class="nav-text">Interface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Type-vs-Interface"><span class="nav-number">3.</span> <span class="nav-text">Type vs Interface</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2021</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Allen Shih</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>
